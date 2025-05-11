@@ -9,10 +9,10 @@ import threading
 import schedule
 import time
 
-# === Settings ===
+# Settings
 SETTINGS_FILE = Path("backup_settings.json")
 
-# === App Setup ===
+# App Setup
 ctk.set_appearance_mode("System")
 ctk.set_default_color_theme("dark-blue")
 
@@ -39,7 +39,7 @@ class BackupApp(ctk.CTk):
         threading.Thread(target=scheduler_loop, daemon=True).start()
 
     def create_widgets(self):
-        # --- Frames ---
+        # Frames
         self.input_frame = ctk.CTkFrame(self)
         self.input_frame.pack(padx=20, pady=20, fill="x")
 
@@ -49,7 +49,7 @@ class BackupApp(ctk.CTk):
         self.status_frame = ctk.CTkFrame(self)
         self.status_frame.pack(padx=20, pady=10, fill="x")
 
-        # === Scheduling Options ===
+        #Scheduling Options
         ctk.CTkLabel(self.button_frame, text="Auto Backup Interval:").grid(row=0, column=2, padx=(10, 5), pady=5, sticky="w")
         self.schedule_var = ctk.StringVar(value="None")
         ctk.CTkOptionMenu(
@@ -60,7 +60,8 @@ class BackupApp(ctk.CTk):
         ).grid(row=0, column=3, padx=(5, 10), pady=5, sticky="ew")
 
 
-        # === Input Frame ===
+        # Input Frame
+        
         # Source
         ctk.CTkLabel(self.input_frame, text="Source Folder:").grid(row=0, column=0, sticky="w", padx=5, pady=5)
         ctk.CTkEntry(self.input_frame, textvariable=self.source_dir, width=400).grid(row=0, column=1, padx=5, pady=5)
@@ -71,11 +72,11 @@ class BackupApp(ctk.CTk):
         ctk.CTkEntry(self.input_frame, textvariable=self.dest_dir, width=400).grid(row=1, column=1, padx=5, pady=5)
         ctk.CTkButton(self.input_frame, text="Browse", command=self.select_dest).grid(row=1, column=2, padx=5, pady=5)
 
-        # === Button Frame ===
+        # Button Frame
         ctk.CTkButton(self.button_frame, text="Run Backup", command=self.run_backup, height=40).grid(row=0, column=0, pady=5, padx=(125, 10), sticky="ew", columnspan=2)
 
 
-        # === Status Frame ===
+        # Status Frame
         self.status_label = ctk.CTkLabel(self.status_frame, text="", text_color="gray")
         self.status_label.pack()
         self.progress_bar = ctk.CTkProgressBar(self.status_frame, mode="indeterminate")
